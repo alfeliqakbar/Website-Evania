@@ -1,0 +1,218 @@
+.container {
+  max-width: 98%;
+  min-height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+
+.responsive-table {
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .table-header {
+    background-color: #95A5A6;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  .col-1 {
+    flex-basis: 10%;
+  }
+  .col-2 {
+    flex-basis: 10%;
+  }
+  .col-3 {
+    flex-basis: 10%;
+  }
+  .col-4 {
+    flex-basis: 10%;
+  }
+  .col-5 {
+    flex-basis: 10%;
+  }
+  .col-6 {
+    flex-basis: 10%;
+  }
+  .col-7 {
+    flex-basis: 10%;
+  }
+  .col-8 {
+    flex-basis: 10%;
+  }
+  
+  @media all and (max-width: 767px) {
+    .table-header {
+      display: none;
+    }
+    .table-row{
+      
+    }
+    li {
+      display: block;
+    }
+    .col {
+      
+      flex-basis: 100%;
+      
+    }
+    .col {
+      display: flex;
+      padding: 10px 0;
+      &:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        // content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+    }
+  }
+}
+
+// .container {
+//     /*  position: fixed;
+//     top: 0px;
+//     bottom: 0px;
+//     left: 0px;
+//     right: 0px; */
+//     height: 100vh;
+//     width: 100vw;
+//     /* overflow: scroll; */
+    
+//     .topbox {
+//     height: 300px;
+//     background: #c8e0ec;
+//     }
+    
+    
+// .table {
+//     position: relative;
+//     width: 100%;
+//     height: 100%;
+    
+//     .header {
+//       display: flex;
+//       flex-direction: row;
+//       flex-wrap: nowrap;
+//       align-items: stretch;
+//       height: 30px;
+//       width: 100%;
+//       border-bottom: 1px solid #d3d3d3;
+      
+//       .shadow {
+//         position: absolute;
+//         top: 31px;
+//       }
+      
+//       .hcol {
+//         display: flex;
+//         background-color: #e5e8eb;
+//         border-color: #DFDFDF;
+//         justify-content: space-between;
+//         padding: 0 7px;
+//         height: 30px;
+//         align-items: center;
+//         cursor: pointer;
+//         color: #1F384D;
+//         box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.5);
+//         width: 100%;
+//       }
+      
+//     }
+    
+//     .header.fixed {
+//       background: #e5e8eb;
+//       z-index: 99;
+//       position: fixed;
+//       top: 0px;
+//       .shadow {
+//         height: 3px;
+//         width: 100%;
+        
+//         background: 0 0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAF0lEQVR4AWPUkNeSBhHCjJoK2twgFisAFagCCp3pJlAAAAAASUVORK5CYII=) repeat-x;
+//       }
+//     }
+    
+//     ul {
+//       list-style: none;
+//       padding: 0px;
+//       margin: 0px;
+//       position: absolute;
+//       top: 32px;
+//       width: 100%;
+//       li {
+//         width: 100%;
+//         min-height: 83px;
+//         border-bottom: 1px solid #DFDFDF;
+        
+//         .heading {
+//           display: flex;
+//           display: flex;
+//           flex-direction: row;
+//           flex-wrap: nowrap;
+//           align-items: stretch;
+//           width: 100%;
+//           height: 83px;
+//           cursor: pointer;
+//           transition: background 0.5s;
+          
+//           .col {
+//             display: flex;
+//             align-items: center;
+//             width: 100%;
+//             padding: 0 10px;
+//             height: 83px;
+//             border-right: 1px solid #DFDFDF;
+//           }
+//         }
+//         .content {
+//           width: 100%;
+//           height: 0px;
+//           opacity:0;
+//           transition: height 1s;
+//         }
+        
+//       }
+      
+//       li.open {
+        
+//         .heading {
+//           background: #4d98bc;
+//           color: #ffffff;
+          
+//           .col {
+//             border: none;
+//           }
+//         }
+        
+//         .content {
+//           height: 300px;
+//           // height: auto;
+//           opacity: 1;
+//         }
+        
+//       }
+//     }
+  
+//   }
+//   }

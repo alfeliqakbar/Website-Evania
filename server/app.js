@@ -1,0 +1,135 @@
+const express = require('express')
+const app = express()
+// const morgan = require('morgan')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const bycrypt = require('bcryptjs')
+const saltRounds = 10
+// const mysql = require('mysql')
+const jwt = require('jsonwebtoken')
+const apiRouter = require('./src/routes/rajaongkir.api')
+
+app.use(express.json())
+app.use(cors(
+    // {
+    //     origin: ['http://localhost:3001'],
+    //     methods: ['GET','POST'],
+    //     credentials: true
+    // }
+))
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(session({
+    key: 'userId',
+    secret: 'evania',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60*60*24,
+    }
+}))
+app.use('/ongkir', apiRouter)
+
+app.get("/", (req, res) => {
+    res.json({message : 'evania-api'})
+})
+
+//Import order routes
+const orderRoutes = require('./src/routes/order_pickup.route')
+//Create order routes
+app.use('/api/v1/order-pickup', orderRoutes)
+
+// Import user routes
+// const userRoutes = require('./src/routes/user.routes')
+//Create order routes
+// app.use('/api/v1/user', userRoutes)
+const database = require('./config/db.config')
+
+app.post('/register', (req,res) => {
+    const name = req.body.name
+    const email = req.body.email
+    const phone = req.body.phone
+    const password = req.body.password
+
+    bycrypt.hash(password,saltRounds,(err, hash) => {
+        if(err){
+            console.log(err)
+        }
+        database.query(
+        "INSERT INTO user (name, email, phone, password) VALUES (?,?,?,?)",
+        [name, email, phone, hash],
+        (err, result) => {
+            console.log(err)
+        }
+        )
+    })
+    
+})
+
+const verifyJWT = (req, res, next) => {
+    const token = req.headers['x-access-token']
+
+    if(!token){
+        res.send('we need a token')
+    }else{
+        jwt.verify(token, 'jwtSecret', (err,decoded) => {
+            if(err) {
+                res.json({ auth: false, message : ' You failed to authenticate'})
+            }else{
+                req.userId = decoded.id
+                next()
+            }
+        })
+    }
+}
+
+app.get('/login', (req, res) => {
+    if(req.session.user) {
+        res.send({loggedin: true, user: req.session.user})
+    }else{
+        res.send({loggedin: false})
+    }
+})
+
+app.get('/isUserAuth', verifyJWT, (req, res) => {
+    res.send('You are authenticated!')
+})
+
+app.post('/login', (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+
+    database.query(
+        'SELECT * FROM user WHERE email = ?',
+        email,
+        (err, result) => {
+            if(err){
+                res.send(err)
+            }
+            if (result.length > 0) {
+                bycrypt.compare(password, result[0].password, (error, response) =>{
+                    if(response){
+                        const id = result[0].id
+                        const token = jwt.sign({id}, "jwtSecret", {
+                            expiresIn: 300,
+                        })
+                        req.session.user = result
+
+                        res.json({auth: true, token: token, result: result})
+                    }else {
+                        res.send({ message : 'Wrong combination !'})
+                    }
+                })
+            } else {
+                res.send({message: 'user dont exist' })
+            }
+        }
+    )
+})
+
+// Environment
+app.listen(3001, () => {
+    console.log('Running on port 3001')
+})
