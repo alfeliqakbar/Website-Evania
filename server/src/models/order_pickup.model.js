@@ -32,7 +32,7 @@ Orders.getAllOrder = (result) => {
     })
 }
 
-// GET order by id
+// GET order by waybill
 Orders.getOrderByWaybill = (waybill, result) => {
     database.query('SELECT * FROM order_pickup WHERE waybill_number=?', waybill, (err, res) => {
         if(err){

@@ -10,7 +10,7 @@ const Services = () => {
         <ServicesContainer id='services'>
             <ServicesH1>Our Services</ServicesH1>
             <ServicesWrapper>
-                <ServicesCard to='/track'>
+                <ServicesCard to='/rates'>
                     <ServicesIcon src={Icon3}/>
                     <ServicesH2>Cek Ongkir</ServicesH2>
                     <ServicesP>Akses dari mana saja</ServicesP>

@@ -10,8 +10,12 @@ const Rates = () => {
                 <TrackTitle>|Rates</TrackTitle>
                 <Gap height={40} />
                 <TrackBtnWrap>
-                    <TrackButton to='/track'>Track</TrackButton>
-                    <TrackButton to='/rates'>Rates</TrackButton>
+                    <TrackButton to='/track'
+                    spy={true} exact='true'
+                    >Track</TrackButton>
+                    <TrackButton to='/rates'
+                    spy={true} exact='true'
+                    >Rates</TrackButton>
                 </TrackBtnWrap>
                 <Gap height={30} />
                 <TrackContent>
