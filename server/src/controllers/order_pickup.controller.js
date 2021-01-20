@@ -16,10 +16,12 @@ exports.getOrderList = (req,res) => {
 exports.getOrderByWaybill = (req, res) => {
     // console.log('get order by id')
     OrdersModel.getOrderByWaybill(req.params.waybill_number, (err, order) => {
-        if(err)
-        res.send(err)
-        // console.log('single order', order)
-        res.send(order)
+        if(err){
+            res.send(err)
+        }else{
+            res.send(order)
+        }
+            
     })
 }
 

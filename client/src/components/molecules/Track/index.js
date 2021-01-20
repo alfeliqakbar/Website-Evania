@@ -1,7 +1,4 @@
-// import axios from 'axios'
-import React, {useState,
-    // useEffect
-} from 'react'
+import React, {useState,} from 'react'
 
 import { Gap } from '../../atoms'
 import { FormInput } from '../Signin/SigninElements'
@@ -18,15 +15,7 @@ const Track = () => {
     const [itemName, setItemName] = useState('')
     const [itemWeight, setItemWeight] = useState('')
     const [status, setStatus] = useState('')
-    
-    // useEffect(() => {
-    //     fetch(`http://localhost:3001/api/v1/order-pickup/${userInput}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             setData(data)
-    //         })
-    // }, [])
+    const [error, setError] = useState('')
     
 
     const setData = ([{
@@ -54,25 +43,12 @@ const Track = () => {
         .then(res => res.json())
         .then(data => {
             setData(data)
-            console.log(data)
         })
-        
+        .catch(err => {
+            console.log(err)
+            setError("Wrong waybill number!")
+        })
     }
-
-    // const List = ({waybill}) => {
-    //     return (
-    //         <li className="table-row">
-    //             <div className="col col-1" >{waybill.waybill_number}</div>
-    //             <div className="col col-2" >{waybill.sender_name}</div>
-    //             <div className="col col-3" >{waybill.sender_address}</div>
-    //             <div className="col col-4" >{waybill.recipient_name}</div>
-    //             <div className="col col-5" >{waybill.recipient_address}</div>
-    //             <div className="col col-6" >{waybill.item_name}</div>
-    //             <div className="col col-7" >{waybill.item_weight}</div>
-    //             <div className="col col-8" >{waybill.status}</div>
-    //         </li>
-    //     )
-    // }    
 
     return (
         <TrackContainer>
@@ -86,7 +62,6 @@ const Track = () => {
                 <Gap height={30} />
                 <TrackContent>
                     <TrackForm 
-                    // onSubmit={handleSubmit}
                     onSubmit = {e => {
                         e.preventDefault()
                         handleSubmit(e)
@@ -103,7 +78,7 @@ const Track = () => {
                     </TrackForm>
                 </TrackContent>
             </TrackWrapper>
-            <div className="container">
+            {error ? (<h1 style={{display:'flex', justifyContent:'center'}}>{error}</h1>) : (<div className="container">
                 <ul className="responsive-table">
                     <li className="table-header">
                         <div className="col col-1">Waybill</div>
@@ -117,10 +92,6 @@ const Track = () => {
                         <div className="col col-7">Item Weight</div>
                         <div className="col col-8">Status</div>
                     </li>
-
-                    {/* {waybill.map((w, index) => {
-                        return<List key={index} waybill={w} />
-                    })} */}
                     <li className="table-row">
                         <div className="col col-1" >{waybill}</div>
                         <div className="col col-2" >{senderName}</div>
@@ -132,7 +103,8 @@ const Track = () => {
                         <div className="col col-8" >{status}</div>
                     </li>
                 </ul>
-            </div>
+            </div>)}
+            
         </TrackContainer>
     )
 }
