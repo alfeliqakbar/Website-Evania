@@ -43,6 +43,7 @@ const Track = () => {
         .then(res => res.json())
         .then(data => {
             setData(data)
+            setError(null)
         })
         .catch(err => {
             console.log(err)
