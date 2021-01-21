@@ -208,10 +208,10 @@ export default class Rates extends Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Kurir</td>
+                                    <td>Layanan</td>
                                     <td>
                                         <select onChange={this.handleCourier} id="kurir">
-                                            <option>-- Layanan --</option>
+                                            <option>-- Pilih Layanan --</option>
                                             <option value="jne">E-Express</option>
                                             {/* <option value="jne">JNE</option>
                                             <option value="pos">POS Indonesia</option>
