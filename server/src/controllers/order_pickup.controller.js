@@ -45,22 +45,22 @@ exports.createNewOrder = (req, res) => {
 
 
 // UPDATE order_pickup list
-exports.updateOrder = (req, res) => {
-    const orderReqData = new OrdersModel(req.body)
-    console.log('orderReqData update', orderReqData)
-    //check null
-    if(req.body.constructor === Object && Object(req.body).length === 0) {
-        res.send(400).send({succes: false, message: 'Please fill all the fields'})
-    }else{
-        console.log('valid order data')
+// exports.updateOrder = (req, res) => {
+//     const orderReqData = new OrdersModel(req.body)
+//     console.log('orderReqData update', orderReqData)
+//     //check null
+//     if(req.body.constructor === Object && Object(req.body).length === 0) {
+//         res.send(400).send({succes: false, message: 'Please fill all the fields'})
+//     }else{
+//         console.log('valid order data')
         
-        OrdersModel.updateOrder(req.params.id, orderReqData, (err, order) => {
-            if(err)
-                res.send(err)
-                res.json({status: true, message: 'Order updated successfully', data: order.insertId})
-        })
-    }
-}
+//         OrdersModel.updateOrder(req.params.id, orderReqData, (err, order) => {
+//             if(err)
+//                 res.send(err)
+//                 res.json({status: order.insertStatus, message: 'Order updated successfully', data: order.insertId})
+//         })
+//     }
+// }
 
 // UPDATE order-pickup status only
 exports.updateOrder = (req, res) => {
@@ -72,10 +72,10 @@ exports.updateOrder = (req, res) => {
     }else{
         console.log('valid order status')
         
-        OrdersModel.updateOrder(req.params.id, orderReqData, (err, order) => {
+        OrdersModel.updateOrder(req.params.waybill_number, orderReqData, (err, order) => {
             if(err)
                 res.send(err)
-                res.json({status: true, message: 'Order status updated successfully', data: order.insertId})
+                res.json({status: true, message: 'Order status updated successfully', data: order.insertWaybill_number})
         })
     }
 }

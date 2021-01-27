@@ -14,10 +14,10 @@ router.get('/:waybill_number', orderController.getOrderByWaybill)
 router.post('/', orderController.createNewOrder)
 
 // UPDATE order
-router.put('/:id', orderController.updateOrder)
+// router.put('/:id', orderController.updateOrder)
 
 //UPDATE order status only
-router.put( '/:id', orderController.updateOrder)
+router.put( '/:waybill_number', orderController.updateOrder)
 
 // DELETE order
 router.delete('/:id', orderController.deleteOrder)

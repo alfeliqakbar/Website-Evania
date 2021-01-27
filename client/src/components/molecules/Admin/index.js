@@ -1,9 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import './index.scss'
+import axios from 'axios'
+import { Gap } from '../../atoms'
 
 
-const Admin = () => {
+const Admin = props => {
+    
     const [order, setOrder] = useState([])
+    
+    
 
     //componentDidMount
     useEffect(() => {
@@ -15,8 +20,9 @@ const Admin = () => {
             .catch(e => {
                 console.log(e)
             })
-    })
-
+    }, [])
+    
+    
     return (
             <div className="container">
                 <h2>Order Data</h2>
@@ -32,13 +38,10 @@ const Admin = () => {
                         <div className="col col-6">Item Name</div>
                         <div className="col col-7">Item Weight</div>
                         <div className="col col-8">Status</div>
-                    </li>
-
-                    
+                    </li>                    
                         {order.map((o, index) => {
                             return <List key={index} order={o}/>
                         })}
-                
                 {/* <li className="table-row">
                     <div className="col col-1" data-label="Job Id">42235</div>
                     <div className="col col-2" data-label="Customer Name">John Doe</div>
@@ -63,8 +66,24 @@ const Admin = () => {
                     <div className="col col-3" data-label="Amount">$115</div>
                     <div className="col col-4" data-label="Payment Status">Pending</div>
                 </li> */}
-            </ul>
-        </div>
+                </ul>
+                <Gap height={20} />
+                <h2>Delivered</h2>
+                <ul className="responsive-table">
+                    <li className="table-header">
+                        <div className="col col-1">Waybill</div>
+                        <div className="col col-2">Sender</div>
+                        <div className="col col-3">Sender Address</div>
+                        {/* <div className="col col-4">Origin</div> */}
+                        <div className="col col-4">Recipient</div>
+                        <div className="col col-5">Recipient Address</div>
+                        {/* <div className="col col-4">Destination</div> */}
+                        <div className="col col-6">Item Name</div>
+                        <div className="col col-7">Item Weight</div>
+                        <div className="col col-8">Status</div>
+                    </li>
+                </ul> 
+            </div>
     //     <div>
     //         <h1>Order Data</h1>
     //         Order : {order.length}
@@ -99,8 +118,12 @@ const Admin = () => {
     // 
     )
 }
-
 const List = ({order}) => {
+    
+    const handleClick = () => {
+        axios.put()
+    }
+
     return (
         <li className="table-row">
             <div className="col col-1" >{order.waybill_number}</div>
@@ -110,8 +133,9 @@ const List = ({order}) => {
             <div className="col col-5" >{order.recipient_address}</div>
             <div className="col col-6" >{order.item_name}</div>
             <div className="col col-7" >{order.item_weight}</div>
-            <div className="col col-8" >{order.status}</div>
+            <button className="col col-8" >{order.status ? "On proccess" : "Delivered"}</button>
         </li>
+            )}
         // <tr>
         //     {/* <td>{order.id}</td> */}
         //     <td>{order.waybill_number}</td>
@@ -129,8 +153,8 @@ const List = ({order}) => {
         //     <td>{order.item_weight}</td>
         //     <td>{order.status}</td>
         // </tr>
-    )
-}
+    // )
+// }
 
 export default Admin
 

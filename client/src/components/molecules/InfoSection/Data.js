@@ -14,6 +14,7 @@ export const homeObjOne = {
     dark: false,
     primary: false,
     darkText: true,
+    Link: '/track'
 }
 
 

@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { Gap } from '../../atoms'
 import axios from 'axios'
 import { Container, FormWrap, FormContent, Form, FormLabel, FormH1, FormInput, FormButton } from '../Signin/SigninElements'
-
-import Modal from '../../atoms/Modal'
+import Modal from 'react-modal'
+// import Modal from '../../atoms/Modal'
 
 const Order = () => {
     const [order, setOrderData] = useState({ sender_name:'', sender_phone:'', sender_address:'',origin_city:'',origin_postcode:'',
@@ -50,19 +50,24 @@ const Order = () => {
             .catch(err => alert(err))
     }
 
-    const modalRef = React.useRef();
+    // const modalRef = React.useRef();
 
-    const openModal = () => {
-        modalRef.openModal()
-    };
+    // const openModal = () => {
+    //     modalRef.openModal()
+    // };
 
+    const [modalIsOpen, setModalIsOpen] = useState(false)
     
     return (
         <Container>
+            <Modal style={{zIndex: 10,}} isOpen={modalIsOpen}>
+                <h2>Your Waybill Number : </h2>
+                <p>10000004</p>
+            </Modal>
             <Gap height={80} />
             <FormWrap>
                 <FormContent>
-                    <Modal ref={modalRef}>
+                    {/* <Modal ref={modalRef}>
                         <h1>Order Succes!</h1>
                         <p> Your waybill number :
                         <span></span>
@@ -70,7 +75,7 @@ const Order = () => {
                         <button onClick={() => modalRef.current.close()}>
                         Close
                         </button>
-                    </Modal>
+                    </Modal> */}
                     <Form 
                     onSubmit = {e => {
                         e.preventDefault()
@@ -118,7 +123,7 @@ const Order = () => {
                         <FormInput name='quantity' placeholder='ex: 1' /> */}
                         <FormLabel htmlFor='for'>Weight</FormLabel>
                         <FormInput name='item_weight' value={order.item_weight} onChange={putOrderInfo} placeholder='ex: 1kg' required />
-                        <FormButton type='submit' onClick={openModal}>Continue</FormButton>
+                        <FormButton type='submit' onClick={() => {setModalIsOpen(true)}}>Continue</FormButton>
                     </Form>
                 </FormContent>
             </FormWrap>

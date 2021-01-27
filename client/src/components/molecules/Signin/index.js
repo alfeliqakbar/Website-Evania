@@ -7,27 +7,32 @@ import axios from 'axios'
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    axios.defaults.withCredentials = true
     
     const login = () => {
         axios.post('http://localhost:3001/login', {
             email: email,
             password: password
         }).then((response) => {
-            if(response.data.message){
-                alert(response.data.message)
+            if(!response.data.message){
+                console.log(response.data.message)
             } else {
-                alert(response.data[0].name)
+                console.log(response.data[0].name)
+                
             }
         })
     }
 
-    useEffect(() => {
-        axios.get('http://localhost:3001/login')
-        .then((response) => {
-            console.log(response)
-        })
+    // useEffect(() => {
+    //     axios.get('http://localhost:3001/login')
+    //     .then((response) => {
+    //         if(response.data.loggedIn === true) {
+    //             alert(response.data.user[0].name)
+    //         }
+    //     })
 
-    }, [])
+    // }, [])
 
     return (
         <>

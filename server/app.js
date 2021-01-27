@@ -13,14 +13,14 @@ const apiRouter = require('./src/routes/rajaongkir.api')
 
 app.use(express.json())
 app.use(cors(
-    // {
-    //     origin: ['http://localhost:3001'],
-    //     methods: ['GET','POST'],
-    //     credentials: true
-    // }
+    {
+        origin: ['http://localhost:3000'],
+        methods: ['GET','POST'],
+        credentials: true
+    }
 ))
 app.use(cookieParser())
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(session({
     key: 'userId',
     secret: 'evania',
@@ -41,10 +41,6 @@ const orderRoutes = require('./src/routes/order_pickup.route')
 //Create order routes
 app.use('/api/v1/order-pickup', orderRoutes)
 
-// Import user routes
-// const userRoutes = require('./src/routes/user.routes')
-//Create order routes
-// app.use('/api/v1/user', userRoutes)
 const database = require('./config/db.config')
 
 app.post('/register', (req,res) => {
@@ -87,9 +83,9 @@ const verifyJWT = (req, res, next) => {
 
 app.get('/login', (req, res) => {
     if(req.session.user) {
-        res.send({loggedin: true, user: req.session.user})
+        res.send({loggedIn: true, user: req.session.user})
     }else{
-        res.send({loggedin: false})
+        res.send({loggedIn: false})
     }
 })
 
@@ -119,11 +115,11 @@ app.post('/login', (req, res) => {
 
                         res.json({auth: true, token: token, result: result})
                     }else {
-                        res.send({ message : 'Wrong combination !'})
+                        res.send({auth: false, message : 'Wrong combination !'})
                     }
                 })
             } else {
-                res.send({message: 'user dont exist' })
+                res.send({auth: false, message: 'user dont exist' })
             }
         }
     )

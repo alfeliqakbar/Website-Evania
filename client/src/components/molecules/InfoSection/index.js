@@ -2,8 +2,9 @@ import React from 'react'
 import {Button} from '../../atoms'
 import {animateScroll as scroll } from 'react-scroll'
 import {InfoContainer, InfoWrapper, InfoRow, Column1, Column2, TextWrapper, TopLine, Heading, Subtitle, BtnWrp, ImgWrap, Img} from './infoElements'
+import { Link } from 'react-router-dom'
 
-const InfoSection = ({lightBg, id, imgStart, topLine, lightText, headline, darkText, description, buttonLabel, img, alt, primary, dark, dark2 }) => {
+const InfoSection = ({Link,lightBg, id, imgStart, topLine, lightText, headline, darkText, description, buttonLabel, img, alt, primary, dark, dark2 }) => {
     const toggleHome = () => {
         scroll.scrollToTop();
     }
@@ -18,7 +19,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText, headline, darkT
                             <Heading lightText={lightText}>{headline}</Heading>
                             <Subtitle darkText={darkText}>{description}</Subtitle>
                             <BtnWrp>
-                                <Button to='/'
+                                <Button to={Link}
                                 onClick={toggleHome}
                                 smooth={true}
                                 duration={500}

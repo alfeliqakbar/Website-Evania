@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Sidebar, Navbar} from '../components'
 import Drop from '../components/molecules/Order'
 import SimpleFooter from '../components/molecules/Footer/simpleFooter.js'
+import SimpleNavbar from '../components/molecules/Navbar/simpleNavbar'
 
 const PickupPage = () => {
     const[isOpen, setIsOpen] = useState(false)
@@ -11,7 +12,8 @@ const PickupPage = () => {
     }
     return (
         <>
-            <Navbar toggle={toggle} />
+            {/* <Navbar toggle={toggle} /> */}
+            <SimpleNavbar toggle={toggle}/>
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Drop />
             <SimpleFooter />

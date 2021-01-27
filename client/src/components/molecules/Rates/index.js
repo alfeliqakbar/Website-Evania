@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Gap } from '../../atoms'
-import { FormInput } from '../Signin/SigninElements'
-import {TrackBtnForm, TrackForm, TrackContainer, TrackWrapper, TrackBtnFormWrap, TrackTitle, TrackBtnWrap, TrackButton, TrackContent} from '../Track/TrackElements'
+// import { FormInput } from '../Signin/SigninElements'
+import {TrackForm, TrackContainer, TrackWrapper, TrackTitle, TrackBtnWrap, TrackButton, TrackContent} from '../Track/TrackElements'
 import './rates.css'
 
 export default class Rates extends Component {

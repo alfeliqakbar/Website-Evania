@@ -60,22 +60,22 @@ Orders.createOrder = (orderReqData, result) => {
 }
 
 // UPDATE order
-Orders.updateOrder = (id, orderReqData, result) => {
-    database.query("UPDATE order_pickup SET sender_name=?, sender_phone=?, sender_address=?, origin_city=?, origin_postcode=?, recipient_name=?, recipient_phone=?, recipient_address=?, destination_city=?, destination_postcode=?, item_name=?, item_weight=?, status=? WHERE id=?" , [orderReqData.sender_name, orderReqData.sender_phone, orderReqData.sender_address, orderReqData.origin_city, orderReqData.origin_postcode, orderReqData.recipient_name, orderReqData.recipient_phone, orderReqData.recipient_address, orderReqData.destination_city, orderReqData.destination_postcode, orderReqData.item_name, orderReqData.item_weight, orderReqData.status, id],
-    (err, res) => {
-        if(err){
-            console.log('error while updating')
-            result(null, err)
-        }else{
-            console.log('Order has been updated')
-            result(null, res)
-        }
-    })
-}
+// Orders.updateOrder = (id, orderReqData, result) => {
+//     database.query("UPDATE order_pickup SET sender_name=?, sender_phone=?, sender_address=?, origin_city=?, origin_postcode=?, recipient_name=?, recipient_phone=?, recipient_address=?, destination_city=?, destination_postcode=?, item_name=?, item_weight=?, status=? WHERE id=?" , [orderReqData.sender_name, orderReqData.sender_phone, orderReqData.sender_address, orderReqData.origin_city, orderReqData.origin_postcode, orderReqData.recipient_name, orderReqData.recipient_phone, orderReqData.recipient_address, orderReqData.destination_city, orderReqData.destination_postcode, orderReqData.item_name, orderReqData.item_weight, orderReqData.status, id],
+//     (err, res) => {
+//         if(err){
+//             console.log('error while updating')
+//             result(null, err)
+//         }else{
+//             console.log('Order has been updated')
+//             result(null, res)
+//         }
+//     })
+// }
 
 //UPDATE order status only
-Orders.updateOrder = (id, orderReqData, result) => {
-    database.query("UPDATE order_pickup SET status=? WHERE id=?", [orderReqData.status, id],
+Orders.updateOrder = (waybill_number, orderReqData, result) => {
+    database.query("UPDATE order_pickup SET status=? WHERE waybill_number=?", [orderReqData.status, waybill_number],
     (err, res) => {
         if(err){
             console.log('error while updating status')
