@@ -4,11 +4,8 @@ import axios from 'axios'
 import { Gap } from '../../atoms'
 
 
-const Admin = props => {
-    
+const Admin = () => {
     const [order, setOrder] = useState([])
-    
-    
 
     //componentDidMount
     useEffect(() => {
@@ -42,30 +39,6 @@ const Admin = props => {
                         {order.map((o, index) => {
                             return <List key={index} order={o}/>
                         })}
-                {/* <li className="table-row">
-                    <div className="col col-1" data-label="Job Id">42235</div>
-                    <div className="col col-2" data-label="Customer Name">John Doe</div>
-                    <div className="col col-3" data-label="Amount">$350</div>
-                    <div className="col col-4" data-label="Payment Status">Pending</div>
-                </li> */}
-                {/* <li className="table-row">
-                    <div className="col col-1" data-label="Job Id">42442</div>
-                    <div className="col col-2" data-label="Customer Name">Jennifer Smith</div>
-                    <div className="col col-3" data-label="Amount">$220</div>
-                    <div className="col col-4" data-label="Payment Status">Pending</div>
-                </li>
-                <li className="table-row">
-                    <div className="col col-1" data-label="Job Id">42257</div>
-                    <div className="col col-2" data-label="Customer Name">John Smith</div>
-                    <div className="col col-3" data-label="Amount">$341</div>
-                    <div className="col col-4" data-label="Payment Status">Pending</div>
-                </li>
-                <li className="table-row">
-                    <div className="col col-1" data-label="Job Id">42311</div>
-                    <div className="col col-2" data-label="Customer Name">John Carpenter</div>
-                    <div className="col col-3" data-label="Amount">$115</div>
-                    <div className="col col-4" data-label="Payment Status">Pending</div>
-                </li> */}
                 </ul>
                 <Gap height={20} />
                 <h2>Delivered</h2>
@@ -84,46 +57,30 @@ const Admin = props => {
                     </li>
                 </ul> 
             </div>
-    //     <div>
-    //         <h1>Order Data</h1>
-    //         Order : {order.length}
-    //         <table>
-    //             <thead>
-    //                 <tr>
-    //                     {/* <th>ID</th> */}
-    //                     <th>Waybill</th>
-    //                     <th>Sender Name</th>
-    //                     {/* <th>Sender Phone Number</th> */}
-    //                     <th>Sender Address</th>
-    //                     <th>Origin City</th>
-    //                     {/* <th>Origin Postcode</th> */}
-    //                     <th>Recipient Name</th>
-    //                     {/* <th>Recipient Phone Number</th> */}
-    //                     <th>Recipient Address</th>
-    //                     <th>Destination City</th>
-    //                     {/* <th>Destination Postcode</th> */}
-    //                     <th>Item Name</th>
-    //                     <th>Item Weight</th>
-    //                     <th>Status</th>
-    //                 </tr>
-                    
-    //             </thead>
-    //             <tbody>
-    //                 {order.map((o, index) => {
-    //                     return <Tr key={index} order={o} />
-    //                 })}
-    //             </tbody>
-    //         </table>
-    //     </div>
-    // 
     )
 }
 const List = ({order}) => {
+    const [process, setProcess] = useState('')
+    // const [delivered, setDelivered] = useState('')
     
     const handleClick = () => {
-        axios.put()
+        let waybill = order.waybill_number
+        
+        axios.put(`http://localhost:3001/api/v1/order-pickup/${waybill}`)
+        .then(res => {
+            if(order.status == 1){
+                setProcess('1')
+            }else{
+                setProcess('0')
+            }
+            console.log(process)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+        
     }
-
+    
     return (
         <li className="table-row">
             <div className="col col-1" >{order.waybill_number}</div>
@@ -133,28 +90,11 @@ const List = ({order}) => {
             <div className="col col-5" >{order.recipient_address}</div>
             <div className="col col-6" >{order.item_name}</div>
             <div className="col col-7" >{order.item_weight}</div>
-            <button className="col col-8" >{order.status ? "On proccess" : "Delivered"}</button>
+            <button className="col col-8" onClick={handleClick}>{order.status ? "On proccess" : "Delivered"}</button>
         </li>
-            )}
-        // <tr>
-        //     {/* <td>{order.id}</td> */}
-        //     <td>{order.waybill_number}</td>
-        //     <td>{order.sender_name}</td>
-        //     {/* <td>{order.sender_phone}</td> */}
-        //     <td>{order.sender_address}</td>
-        //     <td>{order.origin_city}</td>
-        //     {/* <td>{order.origin_postcode}</td> */}
-        //     <td>{order.recipient_name}</td>
-        //     {/* <td>{order.recipient_phone}</td> */}
-        //     <td>{order.recipient_address}</td>
-        //     <td>{order.destination_city}</td>
-        //     {/* <td>{order.destination_postcode}</td> */}
-        //     <td>{order.item_name}</td>
-        //     <td>{order.item_weight}</td>
-        //     <td>{order.status}</td>
-        // </tr>
-    // )
-// }
+    )
+}
+        
 
 export default Admin
 
