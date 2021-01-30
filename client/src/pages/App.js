@@ -12,13 +12,15 @@ import MyorderPage from './Myorder'
 import TrackPage from './Track'
 import RatesPage from './Rates' 
 import AdminPage from './Admin'
+import LoginAdmin from './LoginAdmin'
 
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/' component={SigninPage} exact/>      
+        <Route path='/' component={SigninPage} exact/>
+        <Route path='/admin-login' component={LoginAdmin} exact/>
         <Route path='/home' component={Home} exact/>
         <Route path='/track' component={TrackPage} exact/>
         <Route path='/rates' component={RatesPage} exact/>

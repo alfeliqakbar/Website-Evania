@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { Gap } from '../../atoms'
 import {Link} from 'react-router-dom'
-import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton, Text} from './SigninElements'
+import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton,} from './SigninElements'
 import axios from 'axios'
 
-const SignIn = () => {
+const SignInAdmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -33,7 +33,7 @@ const SignIn = () => {
                     <Icon to='/'>Evania</Icon>
                     <FormContent>
                         <Form action='#'>
-                            <FormH1>Sign in to your account</FormH1>
+                            <FormH1>Sign in Admin</FormH1>
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput type='email' placeholder='E-mail' onChange={(e) => {
                                 setEmail(e.target.value)
@@ -43,10 +43,10 @@ const SignIn = () => {
                                 setPassword(e.target.value)
                             }} required />
                             <Gap height={20} />
-                            <FormButton type='submit' onClick={login}><Link style={{textDecoration: 'none', color: '#fff'}} to ='/home'>Sign In</Link></FormButton>
-                            {/* <Text>Forgot Password ?</Text> */}
-                            <Text to='/register'>Doesn't have an account?</Text>
-                            <Text to='/admin-login'>Are you the Admin?</Text>
+                            <FormButton type='submit' onClick={login}><Link style={{textDecoration: 'none', color: '#fff'}} to ='/admin'>Sign In</Link></FormButton>
+                            
+                            
+                            
                         </Form>
                     </FormContent>
                 </FormWrap>
@@ -55,4 +55,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignInAdmin

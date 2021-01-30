@@ -45,12 +45,12 @@ const SimpleNavbar = ({toggle}) => {
                         <NavItem>
                             <NavLinks to='/pickup'  >Pickup</NavLinks>
                         </NavItem>
-                        <NavItem>
+                        {/* <NavItem>
                             <NavLinks to='/register'>Signup</NavLinks>
-                        </NavItem>
+                        </NavItem> */}
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to='/signin'>Sign In</NavBtnLink>
+                        <NavBtnLink to='/'>Sign Out</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

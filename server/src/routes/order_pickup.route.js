@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const orderController = require('../controllers/order_pickup.controller')
-const { getOrderByWaybill } = require('../models/order_pickup.model')
+// const { getOrderByWaybill } = require('../models/order_pickup.model')
 
 // GET all order list
 router.get('/', orderController.getOrderList)

@@ -67,19 +67,22 @@ const List = ({order}) => {
         let waybill = order.waybill_number
         
         axios.put(`http://localhost:3001/api/v1/order-pickup/${waybill}`)
-        .then(res => {
-            if(order.status == 1){
-                setProcess('1')
-            }else{
-                setProcess('0')
-            }
-            console.log(process)
-        })
+        .then(res => res.json())
+        .then()
         .catch(e => {
             console.log(e)
         })
-        
+        // .then(res => {
+        //     if(order.status == 0){
+        //         setProcess(1)
+        //     }else{
+        //         setProcess(0)
+        //     }
+        //     console.log(process)
     }
+        
+        
+    
     
     return (
         <li className="table-row">
@@ -90,7 +93,7 @@ const List = ({order}) => {
             <div className="col col-5" >{order.recipient_address}</div>
             <div className="col col-6" >{order.item_name}</div>
             <div className="col col-7" >{order.item_weight}</div>
-            <button className="col col-8" onClick={handleClick}>{order.status ? "On proccess" : "Delivered"}</button>
+            <button className="col col-8" onClick={() => handleClick()}>{order.status ? "On proccess" : "Delivered"}</button>
         </li>
     )
 }
