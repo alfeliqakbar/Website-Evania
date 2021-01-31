@@ -13,11 +13,11 @@ const apiRouter = require('./src/routes/rajaongkir.api')
 
 app.use(express.json())
 app.use(cors(
-    {
-        origin: ['http://localhost:3000'],
-        methods: ['GET','POST'],
-        credentials: true
-    }
+    // {
+    //     origin: ['http://localhost:3000'],
+    //     methods: ['GET','POST','PATCH'],
+    //     credentials: true
+    // }
 ))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))

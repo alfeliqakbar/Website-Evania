@@ -60,13 +60,13 @@ const Order = () => {
     
     return (
         <Container>
-            <Modal style={{zIndex: 10,}} isOpen={modalIsOpen}>
-                <h2>Your Waybill Number : </h2>
-                <p>10000004</p>
-            </Modal>
-            <Gap height={80} />
+            {/* <Gap height={80} /> */}
             <FormWrap>
                 <FormContent>
+                    <Modal style={{zIndex: 10,}} isOpen={modalIsOpen}>
+                        <h2>Your Waybill Number : </h2>
+                        <p>10000004</p>
+                    </Modal>
                     {/* <Modal ref={modalRef}>
                         <h1>Order Succes!</h1>
                         <p> Your waybill number :

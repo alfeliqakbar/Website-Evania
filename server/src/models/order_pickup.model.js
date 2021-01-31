@@ -14,7 +14,7 @@ var Orders = function(order){
     this.destination_postcode = order.destination_postcode
     this.item_name = order.item_name
     this.item_weight = order.item_weight
-    this.status = order.status ? order.status : 1
+    this.status = order.status
     this.created_at = new Date()
     this.updated_at = new Date()
 }

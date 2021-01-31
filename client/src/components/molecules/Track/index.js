@@ -101,7 +101,7 @@ const Track = () => {
                         <div className="col col-5" >{recipientAddress}</div>
                         <div className="col col-6" >{itemName}</div>
                         <div className="col col-7" >{itemWeight}</div>
-                        <div className="col col-8" >{status}</div>
+                        <div className="col col-8" >{status ? "On Proccess" : "Delivered"}</div>
                     </li>
                 </ul>
             </div>)}

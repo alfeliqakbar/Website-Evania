@@ -13,6 +13,7 @@ const Admin = () => {
             .then(res => res.json())
             .then(res => {
                 setOrder(res)
+                console.log(res)
             })
             .catch(e => {
                 console.log(e)
@@ -60,32 +61,41 @@ const Admin = () => {
     )
 }
 const List = ({order}) => {
-    const [process, setProcess] = useState('')
-    // const [delivered, setDelivered] = useState('')
-    
-    const handleClick = () => {
-        let waybill = order.waybill_number
-        
-        axios.put(`http://localhost:3001/api/v1/order-pickup/${waybill}`)
-        .then(res => res.json())
-        .then()
-        .catch(e => {
-            console.log(e)
-        })
-        // .then(res => {
-        //     if(order.status == 0){
-        //         setProcess(1)
-        //     }else{
-        //         setProcess(0)
-        //     }
-        //     console.log(process)
+    const [update, setUpdate]= useState({status: ''})
+
+    const patchStatusInfo = (e) => {
+        setUpdate({...update,[e.target.name] : e.target.value})
     }
-        
-        
-    
+
+    const handleClick = () => {
+        let status = update.status
+        let statusOrder = {
+            status
+        }
+        console.log(statusOrder)
+        patchStatus(statusOrder)
+        setUpdate({status: ''})
+    }
+    // const statusOrder = order.status ? "On proccess" : "Delivered"
+    // const handleClick = () => {
+    //     console.log(statusOrder)
+    // }
+
+    const patchStatus = data => {
+        let waybill = order.waybill_number
+        axios.patch(`http://localhost:3001/api/v1/order-pickup/${waybill}`,data)
+        .then(d => {
+            console.log(d)
+            // console.log(order)
+        })
+        .catch(err => console.log(err))
+    }
     
     return (
-        <li className="table-row">
+        <li onSubmit={e => {
+            e.preventDefault()
+            handleClick(0)
+        }} className="table-row">
             <div className="col col-1" >{order.waybill_number}</div>
             <div className="col col-2" >{order.sender_name}</div>
             <div className="col col-3" >{order.sender_address}</div>
@@ -93,7 +103,7 @@ const List = ({order}) => {
             <div className="col col-5" >{order.recipient_address}</div>
             <div className="col col-6" >{order.item_name}</div>
             <div className="col col-7" >{order.item_weight}</div>
-            <button className="col col-8" onClick={() => handleClick()}>{order.status ? "On proccess" : "Delivered"}</button>
+            <button type="submit" className="col col-8" onChange={patchStatusInfo} onClick={handleClick}>{order.status ? "On Proccess" : "Delivered"}</button>
         </li>
     )
 }

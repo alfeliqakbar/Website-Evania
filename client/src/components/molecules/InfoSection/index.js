@@ -2,7 +2,7 @@ import React from 'react'
 import {Button} from '../../atoms'
 import {animateScroll as scroll } from 'react-scroll'
 import {InfoContainer, InfoWrapper, InfoRow, Column1, Column2, TextWrapper, TopLine, Heading, Subtitle, BtnWrp, ImgWrap, Img} from './infoElements'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const InfoSection = ({Link,lightBg, id, imgStart, topLine, lightText, headline, darkText, description, buttonLabel, img, alt, primary, dark, dark2 }) => {
     const toggleHome = () => {

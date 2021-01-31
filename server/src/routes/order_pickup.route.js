@@ -17,7 +17,7 @@ router.post('/', orderController.createNewOrder)
 // router.put('/:id', orderController.updateOrder)
 
 //UPDATE order status only
-router.put( '/:waybill_number', orderController.updateOrder)
+router.patch('/:waybill_number', orderController.updateOrder)
 
 // DELETE order
 router.delete('/:id', orderController.deleteOrder)

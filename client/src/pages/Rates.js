@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Sidebar, Navbar} from '../components'
+import {Sidebar,} from '../components'
 import SimpleFooter from '../components/molecules/Footer/simpleFooter.js'
 import SimpleNavbar from '../components/molecules/Navbar/simpleNavbar'
 import Rates from '../components/molecules/Rates'
@@ -12,7 +12,7 @@ const RatesPage = () => {
     }
     return (
         <>
-            {/* <Navbar toggle={toggle} /> */}
+            
             <SimpleNavbar toggle={toggle} />
             <Sidebar isOpen={isOpen} toggle={toggle} />
             <Rates/>
