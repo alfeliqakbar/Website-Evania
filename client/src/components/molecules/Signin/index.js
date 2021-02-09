@@ -1,12 +1,18 @@
 import React, {useState} from 'react'
+
 import { Gap } from '../../atoms'
-import {Link} from 'react-router-dom'
+
 import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton, Text} from './SigninElements'
 import axios from 'axios'
+
+
 
 const SignIn = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loginStatus, setLoginStatus] = useState()
+    
+    
 
     axios.defaults.withCredentials = true
     
@@ -15,16 +21,41 @@ const SignIn = () => {
             email: email,
             password: password
         }).then((response) => {
-            if(!response.data.message){
-                console.log(response.data.message)
-            } else {
-                console.log(response.data[0].name)
+            console.log(response.data)
+            if(!response.data.auth){
+                setLoginStatus(false)
+                
+            }else{
+                setLoginStatus(true)
+                
+                localStorage.setItem("token", response.data.token)
                 
             }
         })
+        
     }
 
-    
+    // useEffect(() => {
+    //     axios.get('http://localhost:3001/login')
+    //     .then((response) => {
+    //         if(!response.data){
+    //             console.log(response.data)
+    //         }else{
+    //             console.log(response.data)
+    //         }
+    //         // if(response.data.loggedIn === )
+    //     })
+    // }, [])
+
+    // const userAuth = () => {
+    //     axios.get('http://localhost:3001/isUserAuth' , {
+    //         headers: {
+    //             'x-access-token' : localStorage.getItem("token")
+    //         }
+    //     }).then((response) => {
+    //         console.log(response)
+    //     })
+    // }
 
     return (
         <>
@@ -43,16 +74,19 @@ const SignIn = () => {
                                 setPassword(e.target.value)
                             }} required />
                             <Gap height={20} />
-                            <FormButton type='submit' onClick={login}><Link style={{textDecoration: 'none', color: '#fff'}} to ='/home'>Sign In</Link></FormButton>
+                            <FormButton type='submit' onClick={login} style={{textDecoration: 'none', color: '#fff', textAlign:'center'}} to='/home' > Sign In</FormButton>
                             {/* <Text>Forgot Password ?</Text> */}
                             <Text to='/register'>Doesn't have an account?</Text>
                             <Text to='/admin-login'>Are you the Admin?</Text>
+                            {loginStatus}
                         </Form>
                     </FormContent>
                 </FormWrap>
             </Container>
+            
         </>
     )
 }
+
 
 export default SignIn

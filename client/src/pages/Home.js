@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {withRouter} from 'react-router-dom'
 import {HeroSection, Navbar, Sidebar, InfoSection, Services ,Footer} from '../components'
 import { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from '../components/molecules/InfoSection/Data'
 
@@ -26,4 +27,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default withRouter(Home)

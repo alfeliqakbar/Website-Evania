@@ -13,11 +13,11 @@ const apiRouter = require('./src/routes/rajaongkir.api')
 
 app.use(express.json())
 app.use(cors(
-    // {
-    //     origin: ['http://localhost:3000'],
-    //     methods: ['GET','POST','PATCH'],
-    //     credentials: true
-    // }
+    {
+        origin: ['http://localhost:3000'],
+        methods: ['GET','POST','PATCH'],
+        credentials: true
+    }
 ))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -54,16 +54,26 @@ app.post('/register', (req,res) => {
             console.log(err)
         }
         database.query(
-        "INSERT INTO user (name, email, phone, password) VALUES (?,?,?,?)",
-        [name, email, phone, hash],
-        (err, result) => {
-            console.log(err)
+            "INSERT INTO user (name, email, phone, password) VALUES (?,?,?,?)",
+            [name, email, phone, hash],
+            (err, result) => {
+                console.log(err)
         }
         )
     })
     
 })
 
+
+app.get('/login', (req, res) => {
+    if(req.session.user) {
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false})
+    }
+})
+
+// Middleware
 const verifyJWT = (req, res, next) => {
     const token = req.headers['x-access-token']
 
@@ -80,29 +90,21 @@ const verifyJWT = (req, res, next) => {
         })
     }
 }
-
-app.get('/login', (req, res) => {
-    if(req.session.user) {
-        res.send({loggedIn: true, user: req.session.user})
-    }else{
-        res.send({loggedIn: false})
-    }
-})
-
 app.get('/isUserAuth', verifyJWT, (req, res) => {
     res.send('You are authenticated!')
 })
+
 
 app.post('/login', (req, res) => {
     const email = req.body.email
     const password = req.body.password
 
     database.query(
-        'SELECT * FROM user WHERE email = ?',
+        'SELECT * FROM user WHERE email = ?;',
         email,
         (err, result) => {
             if(err){
-                res.send(err)
+                res.send({err: err})
             }
             if (result.length > 0) {
                 bycrypt.compare(password, result[0].password, (error, response) =>{

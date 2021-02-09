@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import Home from '../pages/Home'
@@ -13,15 +14,33 @@ import TrackPage from './Track'
 import RatesPage from './Rates' 
 import AdminPage from './Admin'
 import LoginAdmin from './LoginAdmin'
+import ProtectedRoutes from '../components/ProtectedRoutes'
 
 
 function App() {
+  const [isAuth, setIsAuth] = useState()
+  useEffect(() => {
+    axios.get('http://localhost:3001/isUserAuth' , {
+      headers: {
+        'x-access-token' : localStorage.getItem("token")
+      }
+    }).then((response) => {
+      // console.log(response)
+      if(response.data == null){
+        setIsAuth(false)
+      }else{
+        setIsAuth(true)
+        console.log(response)
+      }
+    })
+    }, [])
+
   return (
     <Router>
       <Switch>
         <Route path='/' component={SigninPage} exact/>
         <Route path='/admin-login' component={LoginAdmin} exact/>
-        <Route path='/home' component={Home} exact/>
+        {/* <Route path='/home' component={Home} exact/> */}
         <Route path='/track' component={TrackPage} exact/>
         <Route path='/rates' component={RatesPage} exact/>
         <Route path='/register' component={RegisterPage} exact/>
@@ -30,6 +49,7 @@ function App() {
         <Route path='/profile' component={ProfilePage} exact />
         <Route path='/myorder' component={MyorderPage} exact />
         <Route path='/admin' component={AdminPage} exact />
+        <ProtectedRoutes path='/home' component={Home} isAuth={isAuth}/>
       </Switch>
     </Router>
   );

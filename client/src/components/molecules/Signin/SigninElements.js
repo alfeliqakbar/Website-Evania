@@ -99,7 +99,7 @@ export const FormInput = styled.input`
     border-radius: 4px;
 `
 
-export const FormButton = styled.button`
+export const FormButton = styled(Link)`
     background: #d72323;
     padding: 16px 0;
     border: none;
