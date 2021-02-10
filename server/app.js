@@ -64,8 +64,37 @@ app.post('/register', (req,res) => {
     
 })
 
+app.post('/registerAdmin', (req,res) => {
+    const name = req.body.name
+    const email = req.body.email
+    const phone = req.body.phone
+    const password = req.body.password
+
+    bycrypt.hash(password,saltRounds,(err, hash) => {
+        if(err){
+            console.log(err)
+        }
+        database.query(
+            "INSERT INTO admin (name, email, phone, password) VALUES (?,?,?,?)",
+            [name, email, phone, hash],
+            (err, result) => {
+                console.log(err)
+        }
+        )
+    })
+    
+})
+
 
 app.get('/login', (req, res) => {
+    if(req.session.user) {
+        res.send({loggedIn: true, user: req.session.user})
+    }else{
+        res.send({loggedIn: false})
+    }
+})
+
+app.get('/loginAdmin', (req, res) => {
     if(req.session.user) {
         res.send({loggedIn: true, user: req.session.user})
     }else{
@@ -90,10 +119,14 @@ const verifyJWT = (req, res, next) => {
         })
     }
 }
+
 app.get('/isUserAuth', verifyJWT, (req, res) => {
     res.send('You are authenticated!')
 })
 
+app.get('/isAdminAuth', verifyJWT, (req, res) => {
+    res.send('You are authenticated as Admin!')
+})
 
 app.post('/login', (req, res) => {
     const email = req.body.email
@@ -101,6 +134,38 @@ app.post('/login', (req, res) => {
 
     database.query(
         'SELECT * FROM user WHERE email = ?;',
+        email,
+        (err, result) => {
+            if(err){
+                res.send({err: err})
+            }
+            if (result.length > 0) {
+                bycrypt.compare(password, result[0].password, (error, response) =>{
+                    if(response){
+                        const id = result[0].id
+                        const token = jwt.sign({id}, "jwtSecret", {
+                            expiresIn: 300,
+                        })
+                        req.session.user = result
+
+                        res.json({auth: true, token: token, result: result})
+                    }else {
+                        res.send({auth: false, message : 'Wrong combination !'})
+                    }
+                })
+            } else {
+                res.send({auth: false, message: 'user dont exist' })
+            }
+        }
+    )
+})
+
+app.post('/loginAdmin', (req, res) => {
+    const email = req.body.email
+    const password = req.body.password
+
+    database.query(
+        'SELECT * FROM admin WHERE email = ?;',
         email,
         (err, result) => {
             if(err){

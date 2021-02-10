@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Gap } from '../../atoms'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton, Text} from './SigninElements'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ const SignInAdmin = () => {
     axios.defaults.withCredentials = true
     
     const login = () => {
-        axios.post('http://localhost:3001/login', {
+        axios.post('http://localhost:3001/loginAdmin', {
             email: email,
             password: password
         }).then((response) => {

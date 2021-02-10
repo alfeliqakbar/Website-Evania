@@ -20,6 +20,8 @@ import RegristrationAdmin from './RegristrationAdmin'
 
 function App() {
   const [isAuth, setIsAuth] = useState()
+  const [isAdminAuth, setIsAdminAuth] = useState()
+
   useEffect(() => {
     axios.get('http://localhost:3001/isUserAuth' , {
       headers: {
@@ -36,6 +38,21 @@ function App() {
     })
     }, [])
 
+    useEffect(() => {
+      axios.get('http://localhost:3001/isAdminAuth' , {
+        headers: {
+          'x-access-token' : localStorage.getItem("token")
+        }
+      }).then((response) => {
+        // console.log(response.data.auth)
+        if(response.data.auth === false){
+          setIsAdminAuth(false)
+        }else{
+          setIsAdminAuth(true)
+          console.log(response)
+        }
+      })
+      }, [])
 
   return (
     <Router>
@@ -44,19 +61,13 @@ function App() {
         <Route path='/admin-login' component={LoginAdmin} exact/>
         <Route path='/admin-reg' component={RegristrationAdmin} exact/>
         <Route path='/register' component={RegisterPage} exact/>
-        <Route path='/admin' component={AdminPage} exact />
+        <ProtectedRoutes path='/admin' component={AdminPage} isAuth={isAdminAuth} />
         <ProtectedRoutes path='/home' component={Home} isAuth={isAuth}/>
         <ProtectedRoutes path='/track' component={TrackPage} isAuth={isAuth}/>
         <ProtectedRoutes path='/rates' component={RatesPage} isAuth={isAuth}/>
         <ProtectedRoutes path='/order' component={OrderPage} isAuth={isAuth}/>
         <ProtectedRoutes path='/pickup' component={PickupPage} isAuth={isAuth}/>
-      {/* <Route path='/home' component={Home} exact/> */}
-      {/* <Route path='/track' component={TrackPage} exact/>
-      <Route path='/rates' component={RatesPage} exact/>
-      <Route path='/order' component={OrderPage} exact/>
-      <Route path='/pickup' component={PickupPage} exact/> */}
-      {/* <Route path='/profile' component={ProfilePage} exact />
-      <Route path='/myorder' component={MyorderPage} exact /> */}
+
       </Switch>
     </Router>
   );

@@ -5,17 +5,13 @@ import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLab
 
 const RegisterAdmin = () => {
     
-    // const [nameReg, setNameReg] = useState('')
-    // const [phoneReg, setPhoneReg] = useState('')
     const [emailReg, setEmailReg] = useState('')
     const [passwordReg, setPasswordReg] = useState ('')
 
     axios.defaults.withCredentials = true
     const register = () => {
-        axios.post('http://localhost:3001/register', {
-            // name: nameReg,
+        axios.post('http://localhost:3001/registerAdmin', {
             email: emailReg,
-            // phone: phoneReg,
             password: passwordReg
         }).then((response) => {
             console.log(response)
@@ -32,14 +28,6 @@ const RegisterAdmin = () => {
                     <FormContent>
                         <Form action='#'>
                             <FormH1>Register new account</FormH1>
-                            <FormLabel htmlFor='for'>Name</FormLabel>
-                            {/* <FormInput type='fullname' placeholder='FullName' onChange={(e) => {
-                                setNameReg(e.target.value)
-                            }} required/>
-                            <FormLabel htmlFor='for'>Phone Number</FormLabel>
-                            <FormInput type='phone' placeholder='08**********' onChange={(e) => {
-                                setPhoneReg(e.target.value)
-                            }} required /> */}
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput type='email' placeholder='E-mail' onChange={(e) => {
                                 setEmailReg(e.target.value)
