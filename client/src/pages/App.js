@@ -8,12 +8,12 @@ import OrderPage from './Order'
 import SigninPage from './Signin'
 import RegisterPage from './Register'
 import PickupPage from './Pickup'
-import ProfilePage from './Profile'
-import MyorderPage from './Myorder'
 import TrackPage from './Track'
 import RatesPage from './Rates' 
 import AdminPage from './Admin'
 import LoginAdmin from './LoginAdmin'
+// import ProfilePage from './Profile'
+// import MyorderPage from './Myorder'
 import ProtectedRoutes from '../components/ProtectedRoutes'
 
 
@@ -35,25 +35,26 @@ function App() {
     })
     }, [])
 
-    // useEffect(() => {
-    //   axios.get('http://localhost:3001/login')
-    // }, [])
 
   return (
     <Router>
       <Switch>
         <Route path='/' component={SigninPage} exact/>
         <Route path='/admin-login' component={LoginAdmin} exact/>
-        {/* <Route path='/home' component={Home} exact/> */}
-        <Route path='/track' component={TrackPage} exact/>
-        <Route path='/rates' component={RatesPage} exact/>
         <Route path='/register' component={RegisterPage} exact/>
-        <Route path='/order' component={OrderPage} exact/>
-        <Route path='/pickup' component={PickupPage} exact/>
-        <Route path='/profile' component={ProfilePage} exact />
-        <Route path='/myorder' component={MyorderPage} exact />
         <Route path='/admin' component={AdminPage} exact />
         <ProtectedRoutes path='/home' component={Home} isAuth={isAuth}/>
+        <ProtectedRoutes path='/track' component={TrackPage} isAuth={isAuth}/>
+        <ProtectedRoutes path='/rates' component={RatesPage} isAuth={isAuth}/>
+        <ProtectedRoutes path='/order' component={OrderPage} isAuth={isAuth}/>
+        <ProtectedRoutes path='/pickup' component={PickupPage} isAuth={isAuth}/>
+      {/* <Route path='/home' component={Home} exact/> */}
+      {/* <Route path='/track' component={TrackPage} exact/>
+      <Route path='/rates' component={RatesPage} exact/>
+      <Route path='/order' component={OrderPage} exact/>
+      <Route path='/pickup' component={PickupPage} exact/> */}
+      {/* <Route path='/profile' component={ProfilePage} exact />
+      <Route path='/myorder' component={MyorderPage} exact /> */}
       </Switch>
     </Router>
   );
