@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {FaBars} from 'react-icons/fa'
 import {IconContext} from 'react-icons/lib'
 import {animateScroll as scroll} from 'react-scroll'
@@ -22,6 +23,15 @@ const Navbar = ({toggle}) => {
     const toggleHome = () => {
         scroll.scrollToTop();
     };
+
+    const logout = () => {
+        axios.get('http://localhost:3001/login')
+        .then((response) => {
+            console.log(response.data.loggedIn)
+            if(response.data.loggedIn === false)
+                localStorage.removeItem("token")
+        })
+    }
 
     return (
         <>
@@ -50,7 +60,7 @@ const Navbar = ({toggle}) => {
                         </NavItem> */}
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to='/'>Sign Out</NavBtnLink>
+                        <NavBtnLink onClick={logout} to='/'>Sign Out</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

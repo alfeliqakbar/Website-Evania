@@ -42,21 +42,23 @@ const Admin = () => {
                         })}
                 </ul>
                 <Gap height={20} />
-                <h2>Delivered</h2>
+                
+                {/* <h2>Delivered</h2>
                 <ul className="responsive-table">
                     <li className="table-header">
                         <div className="col col-1">Waybill</div>
                         <div className="col col-2">Sender</div>
                         <div className="col col-3">Sender Address</div>
-                        {/* <div className="col col-4">Origin</div> */}
+                        <div className="col col-4">Origin</div>
                         <div className="col col-4">Recipient</div>
                         <div className="col col-5">Recipient Address</div>
-                        {/* <div className="col col-4">Destination</div> */}
+                        <div className="col col-4">Destination</div>
                         <div className="col col-6">Item Name</div>
                         <div className="col col-7">Item Weight</div>
                         <div className="col col-8">Status</div>
                     </li>
-                </ul> 
+                </ul>  */}
+
             </div>
     )
 }

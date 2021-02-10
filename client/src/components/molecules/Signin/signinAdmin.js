@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Gap } from '../../atoms'
 import {Link} from 'react-router-dom'
-import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton,} from './SigninElements'
+import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton, Text} from './SigninElements'
 import axios from 'axios'
 
 const SignInAdmin = () => {
@@ -43,8 +43,8 @@ const SignInAdmin = () => {
                                 setPassword(e.target.value)
                             }} required />
                             <Gap height={20} />
-                            <FormButton type='submit' onClick={login}><Link style={{textDecoration: 'none', color: '#fff'}} to ='/admin'>Sign In</Link></FormButton>
-                            
+                            <FormButton type='submit' onClick={login} style={{textDecoration: 'none', color: '#fff', textAlign: 'center'}} to='/admin' >Sign In</FormButton>
+                            <Text to='/admin-reg'>Doesn't have an account?</Text>
                             
                             
                         </Form>

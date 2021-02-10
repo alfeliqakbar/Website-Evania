@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import {IconContext} from 'react-icons/lib'
 
@@ -6,6 +7,14 @@ import {Nav, NavbarContainer, NavLogo, NavBtn, NavBtnLink } from './NavbarElemen
 
 const AdminNavbar = () => {
 
+    const logout = () => {
+        axios.get('http://localhost:3001/login')
+        .then((response) => {
+            console.log(response.data.loggedIn)
+            if(response.data.loggedIn === false)
+                localStorage.removeItem("token")
+        })
+    }
     return (
         <>
         <IconContext.Provider value={{ color: '#fff'}}>
@@ -14,7 +23,7 @@ const AdminNavbar = () => {
                     <NavLogo to ='/admin'>Evania</NavLogo>
                     
                     <NavBtn>
-                        <NavBtnLink to='/'>Sign Out</NavBtnLink>
+                        <NavBtnLink onClick={logout} to='/'>Sign Out</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

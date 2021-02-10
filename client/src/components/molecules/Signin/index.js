@@ -35,27 +35,6 @@ const SignIn = () => {
         
     }
 
-    // useEffect(() => {
-    //     axios.get('http://localhost:3001/login')
-    //     .then((response) => {
-    //         if(!response.data){
-    //             console.log(response.data)
-    //         }else{
-    //             console.log(response.data)
-    //         }
-    //         // if(response.data.loggedIn === )
-    //     })
-    // }, [])
-
-    // const userAuth = () => {
-    //     axios.get('http://localhost:3001/isUserAuth' , {
-    //         headers: {
-    //             'x-access-token' : localStorage.getItem("token")
-    //         }
-    //     }).then((response) => {
-    //         console.log(response)
-    //     })
-    // }
 
     return (
         <>

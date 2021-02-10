@@ -15,6 +15,7 @@ import LoginAdmin from './LoginAdmin'
 // import ProfilePage from './Profile'
 // import MyorderPage from './Myorder'
 import ProtectedRoutes from '../components/ProtectedRoutes'
+import RegristrationAdmin from './RegristrationAdmin'
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
       <Switch>
         <Route path='/' component={SigninPage} exact/>
         <Route path='/admin-login' component={LoginAdmin} exact/>
+        <Route path='/admin-reg' component={RegristrationAdmin} exact/>
         <Route path='/register' component={RegisterPage} exact/>
         <Route path='/admin' component={AdminPage} exact />
         <ProtectedRoutes path='/home' component={Home} isAuth={isAuth}/>
