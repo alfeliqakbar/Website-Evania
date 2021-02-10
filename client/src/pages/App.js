@@ -25,8 +25,8 @@ function App() {
         'x-access-token' : localStorage.getItem("token")
       }
     }).then((response) => {
-      // console.log(response)
-      if(response.data == null){
+      // console.log(response.data.auth)
+      if(response.data.auth === false){
         setIsAuth(false)
       }else{
         setIsAuth(true)
@@ -34,6 +34,10 @@ function App() {
       }
     })
     }, [])
+
+    // useEffect(() => {
+    //   axios.get('http://localhost:3001/login')
+    // }, [])
 
   return (
     <Router>

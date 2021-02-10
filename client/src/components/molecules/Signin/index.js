@@ -21,7 +21,7 @@ const SignIn = () => {
             email: email,
             password: password
         }).then((response) => {
-            console.log(response.data)
+            // console.log(response.data)   
             if(!response.data.auth){
                 setLoginStatus(false)
                 
