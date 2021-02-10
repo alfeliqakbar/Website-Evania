@@ -53,7 +53,8 @@ const Order = () => {
     const modalRef = React.useRef();
 
     const openModal = () => {
-        modalRef.openModal()
+        console.log(modalRef)
+        modalRef.current.openModal()
     };
 
     // const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -122,7 +123,7 @@ const Order = () => {
                         <FormInput name='quantity' placeholder='ex: 1' /> */}
                         <FormLabel htmlFor='for'>Weight</FormLabel>
                         <FormInput name='item_weight' value={order.item_weight} onChange={putOrderInfo} placeholder='ex: 1kg' required />
-                        <FormButton type='submit' onClick={openModal}>Continue</FormButton>
+                        <FormButton ref={modalRef} type='submit' onClick={openModal}>Continue</FormButton>
                     </Form>
                 </FormContent>
             </FormWrap>
