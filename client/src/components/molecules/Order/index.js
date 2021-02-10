@@ -65,10 +65,8 @@ const Order = () => {
                 <FormContent>
                     
                     <Modal ref={modalRef}>
-                        <h1>Order Succes!</h1>
-                        <p> Your waybill number :
-                        <span></span>
-                        </p>
+                        <h1>Info</h1>
+                        <p> Your waybill number will be sent to sender an receiver phone number</p>
                         <button onClick={() => modalRef.current.close()}>
                             Close
                         </button>
