@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { ModalBackdrop, ModalBox, ModalWrapper } from "./modalElements";
 
 const Modal = forwardRef((props,ref) => {
-    const [display, setDisplay] = React.useState(true);
+    const [display, setDisplay] = React.useState(false);
 
     useImperativeHandle(ref, () => {
     return {

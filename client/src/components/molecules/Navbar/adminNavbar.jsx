@@ -23,7 +23,7 @@ const AdminNavbar = () => {
                     <NavLogo to ='/admin'>Evania</NavLogo>
                     
                     <NavBtn>
-                        <NavBtnLink onClick={logout} to='/'>Sign Out</NavBtnLink>
+                        <NavBtnLink onClick={logout} to='/admin-login'>Sign Out</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>

@@ -60,7 +60,7 @@ const SimpleNavbar = ({toggle}) => {
                         </NavItem> */}
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink onClick={logout} >Sign Out</NavBtnLink>
+                        <NavBtnLink onClick={logout} to='/' >Sign Out</NavBtnLink>
                     </NavBtn>
                 </NavbarContainer>
             </Nav>
