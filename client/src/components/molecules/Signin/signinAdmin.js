@@ -7,6 +7,7 @@ import axios from 'axios'
 const SignInAdmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loginStatus, setLoginStatus] = useState()
 
     axios.defaults.withCredentials = true
     
@@ -15,16 +16,19 @@ const SignInAdmin = () => {
             email: email,
             password: password
         }).then((response) => {
-            if(!response.data.message){
-                console.log(response.data.message)
-            } else {
-                console.log(response.data[0].name)
+            // console.log(response.data)   
+            if(!response.data.auth){
+                setLoginStatus(false)
+                
+            }else{
+                setLoginStatus(true)
+                
+                localStorage.setItem("token", response.data.token)
                 
             }
         })
+        
     }
-
-    
 
     return (
         <>
@@ -45,7 +49,7 @@ const SignInAdmin = () => {
                             <Gap height={20} />
                             <FormButton type='submit' onClick={login} style={{textDecoration: 'none', color: '#fff', textAlign: 'center'}} to='/admin' >Sign In</FormButton>
                             <Text to='/admin-reg'>Doesn't have an account?</Text>
-                            
+                            {loginStatus}
                             
                         </Form>
                     </FormContent>

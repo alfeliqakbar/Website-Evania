@@ -65,9 +65,7 @@ app.post('/register', (req,res) => {
 })
 
 app.post('/registerAdmin', (req,res) => {
-    const name = req.body.name
     const email = req.body.email
-    const phone = req.body.phone
     const password = req.body.password
 
     bycrypt.hash(password,saltRounds,(err, hash) => {
@@ -75,8 +73,8 @@ app.post('/registerAdmin', (req,res) => {
             console.log(err)
         }
         database.query(
-            "INSERT INTO admin (name, email, phone, password) VALUES (?,?,?,?)",
-            [name, email, phone, hash],
+            "INSERT INTO admin (email, password) VALUES (?,?)",
+            [email, hash],
             (err, result) => {
                 console.log(err)
         }

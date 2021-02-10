@@ -27,7 +27,7 @@ const RegisterAdmin = () => {
                     <Icon to='/'>Evania</Icon>
                     <FormContent>
                         <Form action='#'>
-                            <FormH1>Register new account</FormH1>
+                            <FormH1>Register Admin</FormH1>
                             <FormLabel htmlFor='for'>Email</FormLabel>
                             <FormInput type='email' placeholder='E-mail' onChange={(e) => {
                                 setEmailReg(e.target.value)
