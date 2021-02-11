@@ -108,6 +108,15 @@ export const FormButton = styled(Link)`
     font-size: 20px;
     cursor: pointer;
 `
+export const FormButtonB = styled.button`
+    background: #d72323;
+    padding: 16px 0;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+`
 
 export const Text = styled(Link)`
     text-align: center;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Gap } from '../../atoms'
 import axios from 'axios'
-import { Container, FormWrap, FormContent, Form, FormLabel, FormH1, FormInput, FormButton } from '../Signin/SigninElements'
+import { Container, FormWrap, FormContent, Form, FormLabel, FormH1, FormInput, FormButtonB } from '../Signin/SigninElements'
 // import Modal from 'react-modal'
 import Modal from '../../atoms/Modal'
 
@@ -121,9 +121,9 @@ const Order = () => {
                         <FormInput name='item_name' value={order.item_name} onChange={putOrderInfo} placeholder='Nama Barang' required/>
                         {/* <FormLabel htmlFor='for'>Quantity</FormLabel>
                         <FormInput name='quantity' placeholder='ex: 1' /> */}
-                        <FormLabel htmlFor='for'>Weight</FormLabel>
+                        <FormLabel htmlFor='for'>Weight(kg)</FormLabel>
                         <FormInput name='item_weight' value={order.item_weight} onChange={putOrderInfo} placeholder='ex: 1kg' required />
-                        <FormButton ref={modalRef} type='submit' onClick={openModal}>Continue</FormButton>
+                        <FormButtonB type='submit' onClick={postOrder && openModal}>Continue</FormButtonB>
                     </Form>
                 </FormContent>
             </FormWrap>
