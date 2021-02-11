@@ -11,10 +11,14 @@ const AdminNavbar = () => {
         axios.get('http://localhost:3001/loginAdmin')
         .then((response) => {
             console.log(response.data.loggedIn)
-            if(response.data.loggedIn === false)
+            if(response.data.loggedIn === false){
                 localStorage.removeItem("token")
+            }else{
+                localStorage.removeItem("token")
+            }
         })
     }
+    
     return (
         <>
         <IconContext.Provider value={{ color: '#fff'}}>
