@@ -85,7 +85,7 @@ const List = ({order}) => {
 
     const patchStatus = data => {
         let waybill = order.waybill_number
-        axios.patch(`http://localhost:3001/api/v1/order-pickup/${waybill}`,data)
+        axios.put(`http://localhost:3001/api/v1/order-pickup/${waybill}`,data)
         .then(d => {
             console.log(d)
             // console.log(order)

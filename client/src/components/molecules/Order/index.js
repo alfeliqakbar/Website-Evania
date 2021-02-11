@@ -28,11 +28,12 @@ const Order = () => {
         let destination_postcode = order.destination_postcode
         let item_name = order.item_name
         let item_weight = order.item_weight
+        let status = 1
 
         let orderData = {
             sender_name, sender_phone, sender_address, origin_city, origin_postcode, 
             recipient_name, recipient_phone, recipient_address, destination_city,  destination_postcode,
-            item_name, item_weight
+            item_name, item_weight, status
         }
         console.log(orderData)
         postOrder(orderData)
@@ -47,7 +48,7 @@ const Order = () => {
             .then(d => {
                 console.log(d)
             })
-            .catch(err => alert(err))
+            .catch(err => console.log(err))
     }
 
     const modalRef = React.useRef();
