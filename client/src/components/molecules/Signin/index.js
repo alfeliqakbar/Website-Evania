@@ -24,7 +24,7 @@ const SignIn = () => {
             console.log(response.data)   
             if(!response.data.auth){
                 setLoginStatus(false)
-                
+                alert('Wrong Combination!')
             }else{
                 setLoginStatus(true)
                 

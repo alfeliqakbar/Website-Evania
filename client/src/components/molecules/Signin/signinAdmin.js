@@ -19,11 +19,12 @@ const SignInAdmin = () => {
             // console.log(response.data)   
             if(!response.data.auth){
                 setLoginStatus(false)
+                alert('Wrong Combination!')
                 
             }else{
                 setLoginStatus(true)
                 
-                localStorage.setItem("token", response.data.token)
+                localStorage.setItem("Bearer" + " " + "token", response.data.token)
                 
             }
         })
