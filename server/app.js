@@ -95,13 +95,31 @@ app.get('/login', (req, res) => {
 app.get('/loginAdmin', (req, res) => {
     if(req.session.user) {
         res.send({loggedIn: true, user: req.session.user})
+        console.log(req.session.user)
     }else{
         res.send({loggedIn: false})
     }
 })
 
-// Middleware
-const verifyJWT = (req, res, next) => {
+// Middleware user
+const verifyJWTUser = (req, res, next) => {
+    const token = req.headers['x-access-token']
+
+    if(!token){
+        res.send('we need a token')
+    }else{
+        jwt.verify(token, 'jwtSecret', (err,decoded) => {
+            if(err) {
+                res.json({ auth: false, message : ' You failed to authenticate'})
+            }else{
+                req.userId = decoded.id
+                next()
+            }
+        })
+    }
+}
+// Middleware admin
+const verifyJWTAdmin = (req, res, next) => {
     const token = req.headers['x-access-token']
 
     if(!token){
@@ -118,11 +136,11 @@ const verifyJWT = (req, res, next) => {
     }
 }
 
-app.get('/isUserAuth', verifyJWT, (req, res) => {
+app.get('/isUserAuth', verifyJWTUser, (req, res) => {
     res.send('You are authenticated!')
 })
 
-app.get('/isAdminAuth', verifyJWT, (req, res) => {
+app.get('/isAdminAuth', verifyJWTAdmin, (req, res) => {
     res.send('You are authenticated as Admin!')
 })
 

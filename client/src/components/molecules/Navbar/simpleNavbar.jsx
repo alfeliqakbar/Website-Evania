@@ -28,8 +28,11 @@ const SimpleNavbar = ({toggle}) => {
         axios.get('http://localhost:3001/login')
         .then((response) => {
             console.log(response.data.loggedIn)
-            if(response.data.loggedIn === false)
+            if(response.data.loggedIn === false){
                 localStorage.removeItem("token")
+            }else{
+                localStorage.removeItem("token")
+            }
         })
     }
 

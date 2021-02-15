@@ -1,0 +1,8 @@
+{useHistory} history.push dipakai didalam useEffect yang ada axios.get nya
+
+trus nanti buat ngatur pagenya pake role
+
+
+log in logic
+    submit data nya untuk ngecek(post) dan onclick buat fetch apakah udah login apa belom
+    klo udah push ke halaman home
