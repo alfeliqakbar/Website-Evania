@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 
 import { Gap } from '../../atoms'
 
 import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton, Text} from './SigninElements'
 import axios from 'axios'
+import { LoginContext } from '../../../pages/UserSide'
 
 
 
@@ -12,7 +13,7 @@ const SignIn = () => {
     const [password, setPassword] = useState('')
     const [loginStatus, setLoginStatus] = useState()
     
-    
+    const {setIsAuth} = useContext(LoginContext)
 
     axios.defaults.withCredentials = true
     
@@ -27,7 +28,7 @@ const SignIn = () => {
                 alert('Wrong Combination!')
             }else{
                 setLoginStatus(true)
-                
+                setIsAuth(true)
                 localStorage.setItem("token", response.data.token)
                 
             }

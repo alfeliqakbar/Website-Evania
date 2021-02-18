@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import {FaBars} from 'react-icons/fa'
 import {IconContext} from 'react-icons/lib'
 import {animateScroll as scroll} from 'react-scroll'
 import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements'
+import { LoginContext } from '../../../pages/UserSide'
 
 const Navbar = ({toggle}) => {
     const [scrollNav, setScrollNav] = useState(false)
@@ -24,12 +25,19 @@ const Navbar = ({toggle}) => {
         scroll.scrollToTop();
     };
 
+    const {setIsAuth} = useContext(LoginContext)
+    
     const logout = () => {
         axios.get('http://localhost:3001/login')
         .then((response) => {
             console.log(response.data.loggedIn)
-            if(response.data.loggedIn === false)
+            if(response.data.loggedIn === false){
                 localStorage.removeItem("token")
+                setIsAuth(false)
+            }else{
+                localStorage.removeItem("token")
+                setIsAuth(false)
+            }
         })
     }
 

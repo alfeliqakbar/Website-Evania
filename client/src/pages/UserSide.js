@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, createContext} from 'react'
 import axios from 'axios'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import SigninPage from './Signin'
 import RegisterPage from './Register'
 import UserRoutes from './routes/userRoutes'
+
+export const LoginContext = createContext()
 
 export default function UserSide() {
     const [isAuth, setIsAuth] = useState()
@@ -28,9 +30,11 @@ export default function UserSide() {
     return (
         <Router>
             <Switch>
-                <Route exact path='/' component={SigninPage} />
-                <Route exact path='/register' component={RegisterPage} />
-                {isAuth && <UserRoutes/>}
+                <LoginContext.Provider value={{setIsAuth}}>
+                    <Route exact path='/register' component={RegisterPage} />
+                    {isAuth && <UserRoutes/>}
+                    <Route exact path='/' component={SigninPage} />
+                </LoginContext.Provider>
             </Switch>
         </Router>
     )

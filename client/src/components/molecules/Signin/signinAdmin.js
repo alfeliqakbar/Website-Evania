@@ -1,14 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Gap } from '../../atoms'
 // import {Link} from 'react-router-dom'
 import {Container, FormWrap, Icon, FormContent, Form, FormH1, FormInput, FormLabel, FormButton, Text} from './SigninElements'
 import axios from 'axios'
+import { LoginAdminContext } from '../../../pages/AdminSide'
+
+
 
 const SignInAdmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loginStatus, setLoginStatus] = useState()
-
+    
+    const {setIsAdminAuth} = useContext(LoginAdminContext)
+    
     axios.defaults.withCredentials = true
     
     const login = () => {
@@ -23,7 +28,7 @@ const SignInAdmin = () => {
                 
             }else{
                 setLoginStatus(true)
-                
+                setIsAdminAuth(true)
                 localStorage.setItem("Bearer" + " " + "token", response.data.token)
                 
             }
